@@ -1,5 +1,9 @@
 #include <iostream>
+#include <Windows.h>
+#include <Xinput.h>
+ 
+using std::cout;
 
 int main(){
-  std::cout << "Hello\n";
+  cout << "Hello\n";
 }

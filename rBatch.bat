@@ -9,3 +9,4 @@ if "%answer%"=="y" (
   control.exe
   cd ..
 )
+pause

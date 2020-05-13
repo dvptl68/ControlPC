@@ -5,7 +5,7 @@
 
 using namespace std;
 
-int main(){
+vector<string> getDrives(){
   //Buffer for drives
   char lpBuffer[30];
   //Fills buffer with drives
@@ -27,7 +27,37 @@ int main(){
     }
     i++;
   }
-  for (int i = 0; i < drives.size(); i++){
-    cout << drives[i] << ", ";
+  return drives;
+}
+
+string pickDrive(vector<string>& drives){
+  if (drives.size() > 0){
+    //List all available drives
+    cout << "Available drives: \n\n";
+    for (int i = 0; i < drives.size(); i++){
+      cout << (i+1) << ". " << drives[i] << "\n";
+    }
+    //Prompt user until a valid drive number is entered
+    int index = -1;
+    cout << "\nEnter the number for a drive: ";
+    cin >> index;
+    while (cin.fail() && (index < 1 || index > drives.size())){
+      cout << "You must enter a number between 1 and " << drives.size() << "!\n";
+      cout << "\nEnter the number for a drive: ";
+      cin.clear();
+      cin.ignore(256,'\n');
+      cin >> index;
+    }
+    string d = drives[index - 1];
+    cout << "You picked: " << d << "\n";
+    return d;
+  }else{
+    cout << "No available drives!";
+    return "";
   }
+}
+
+int main(){
+  vector<string> drives = getDrives();
+  pickDrive(drives);
 }

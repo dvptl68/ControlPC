@@ -14,17 +14,20 @@ int main(){
   vector<string> drives;
   int i = 0;
   while (i < (sizeof(lpBuffer)-2)){
-    if (lpBuffer[i+1] == ':' && (lpBuffer[i+2] == '\\' || lpBuffer[i+2] == '/')){
+    //If the format of three consecutive characters is a letter + :\, add to drive vector
+    if (lpBuffer[i+1] == ':' && lpBuffer[i+2] == '\\'){
       string current = "";
       current += lpBuffer[i];
       current += lpBuffer[i+1];
       current += lpBuffer[i+2];
-      drives.push_back(current);
+      //Filters out the boot drive
+      if (current != "C:\\"){
+        drives.push_back(current);
+      }
     }
     i++;
   }
   for (int i = 0; i < drives.size(); i++){
     cout << drives[i] << ", ";
   }
-  return 0;
 }

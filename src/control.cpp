@@ -5,5 +5,5 @@ using std::cout;
 using std::system;
 
 int main(){
-  
+  cout << "hello";
 }

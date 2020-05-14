@@ -1,4 +1,5 @@
 #include <iostream>
+#include <algorithm>
 #include <windows.h>
 #include <vector>
 #include <map>
@@ -45,10 +46,11 @@ string pickDrive(map<string, string>& drives){
     cout << "\nEnter the drive letter: ";
     string letter;
     cin >> letter;
+    transform(letter.begin(), letter.end(), letter.begin(), ::toupper);
     letter += ":\\";
-    // string d = drives[index - 1];
-    // cout << "You picked: " << d << "\n";
-    return "";
+    auto pos = drives.find(letter);
+    cout << "You picked: " << pos->first << " - \"" << pos->second << "\"\n";
+    return letter;
   }else{
     cout << "No available drives!\n";
     return "";

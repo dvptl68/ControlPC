@@ -1,37 +1,11 @@
 #include <iostream>
 #include <algorithm>
 #include <windows.h>
-#include <vector>
 #include <map>
 #include <string>
+#include "Select.hpp"
 
 using namespace std;
-
-map<string, string> getDrives(){
-  //Buffer for drives
-  char lpBuffer[30];
-  //Fills buffer with drives
-  DWORD test = GetLogicalDriveStrings(sizeof(lpBuffer), lpBuffer);
-  //Parse buffer contents into a vector of drive names
-  map<string, string> drives;
-  int i = 0;
-  while (i < (sizeof(lpBuffer)-2)){
-    //If the format of three consecutive characters is a letter + :\, add to drive vector
-    if (lpBuffer[i+1] == ':' && lpBuffer[i+2] == '\\'){
-      char current[4] = {lpBuffer[i], ':', '\\'};
-      //Filters out the boot drive
-      if (current[0] != 'C'){
-        char VolumeName[MAX_PATH];
-        GetVolumeInformationA((LPCSTR)current, (LPSTR)VolumeName, sizeof(VolumeName), NULL, NULL, NULL, NULL, 0);
-        string letter(current);
-        string vol(VolumeName);
-        drives.insert({letter, vol});
-      }
-    }
-    i++;
-  }
-  return drives;
-}
 
 string pickDrive(map<string, string>& drives){
   if (!drives.empty()){
@@ -61,6 +35,9 @@ string pickDrive(map<string, string>& drives){
 }
 
 int main(){
-  map<string, string> drives = getDrives();
+  // map<string, string> drives = getDrives();
+  Select s;
+  map<string, string> drives;
+  s.parseBuffer(drives);
   string d = pickDrive(drives);
 }

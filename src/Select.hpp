@@ -8,5 +8,6 @@ class Select{
     char lpBuffer[30];
   public:
     Select();
-    void parseBuffer(map<string, string> drives);
+    void parseBuffer(map<string, string>& drives);
+    string pickDrive(map<string, string>& drives);
 };

@@ -24,7 +24,7 @@ map<string, string> getDrives(){
         GetVolumeInformationA((LPCSTR)current, (LPSTR)VolumeName, sizeof(VolumeName), NULL, NULL, NULL, NULL, 0);
         string letter(current);
         string vol(VolumeName);
-        drives.insert(pair<string, string>(letter, vol));
+        drives.insert({letter, vol});
       // }
     }
     i++;

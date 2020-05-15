@@ -10,6 +10,7 @@
 using namespace std;
 
 int main(){
+  //Create class object for drive select
   Select s;
   //Create map to store drive letters and their names
   map<string, string> drives;
@@ -17,7 +18,8 @@ int main(){
   s.parseBuffer(drives);
   //Get drive letter from user
   string d = s.pickDrive(drives);
-
+  //Create class object for file select
   PickFile f(d);
+  //Print all available files
   f.printFiles();
 }

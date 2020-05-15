@@ -28,6 +28,7 @@ PickFile::PickFile(string p){
 }
 
 void PickFile::printFiles(){
+  cout << "\nAll available files and subdirectories: \n\n";
   for(int i=0; i < PickFile::files.size(); i++){
     cout << PickFile::files[i] << "\n";
   }

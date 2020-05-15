@@ -3,11 +3,15 @@
 
 using namespace std;
 
+struct Tree {
+  string data;
+  vector<Tree> children;
+};
+
 class PickFile{
   private:
     string path;
     string name;
-    // vector<string> files;
     struct Tree files;
   public:
     PickFile(string p);

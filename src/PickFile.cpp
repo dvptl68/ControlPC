@@ -8,28 +8,46 @@
 
 using namespace std;
 
-PickFile::PickFile(string p){
-  //Set the path private variable
-  PickFile::path = p;
-  //Fill the file vector with all files in the given drive
+struct Tree {
+  string data;
+  vector<Tree> children;
+  void setData(string d){
+    data = d;
+  }
+  void setChildren(vector<Tree> c){
+    children = c;
+  }
+};
+
+void retrieveFiles(string& p, struct Tree files){
   DIR *dir;
   struct dirent *e;
-  //Convert the string path into a char array
-  const char *path = PickFile::path.c_str();
-  if ((dir = opendir(path)) != NULL) {
+  vector<string> children;
+  const char *path = p.c_str();
+  if ((dir = opendir (path)) != NULL) {
     while ((e = readdir (dir)) != NULL) {
-      PickFile::files.push_back(e->d_name);
+      children.push_back(e->d_name);
     }
-    closedir (dir);
-  } else {
-    //Prints error if drive is removed
-    cout << "Error opening drive: " << PickFile::path << "! Make sure it is plugged in and functioning.";
+  }else{
+    cout << "Not a directory.";
   }
+  closedir (dir);
+}
+
+PickFile::PickFile(string p){
+  //Set the path private variable
+  PickFile::path = p.substr(0, 3);
+  PickFile::name = p.substr(3);
+  struct Tree t;
+  PickFile::files = t;
+  //Fill the vector with all available files
+  retrieveFiles(PickFile::path, PickFile::files);
 }
 
 void PickFile::printFiles(){
-  cout << "\nAll available files and subdirectories: \n\n";
-  for(int i=0; i < PickFile::files.size(); i++){
-    cout << PickFile::files[i] << "\n";
-  }
+  cout << "\nAll available files and subdirectories in " << PickFile::path << " -> \"" << PickFile::name << "\": \n\n";
+  //change to account for tree file structure
+  // for(int i=0; i < PickFile::files.size(); i++){
+  //   cout << PickFile::files[i] << "\n";
+  // }
 }

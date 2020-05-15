@@ -34,7 +34,7 @@ void Select::parseBuffer(map<string, string>& drives){
 string Select::pickDrive(map<string, string>& drives){
   if (!drives.empty()){
     //List all available drives
-    cout << "Available drives: \n\n";
+    cout << "\nAvailable drives: \n\n";
     int i = 0;
     for (const auto& x : drives) {
       i++;
@@ -47,10 +47,9 @@ string Select::pickDrive(map<string, string>& drives){
     //Convert to uppercase in case user entered lowercase letter
     transform(letter.begin(), letter.end(), letter.begin(), ::toupper);
     letter += ":\\";
-    //Use an iterator to find and print the selected drive from the map
+    //Use an iterator to find the selected drive from the map
     auto pos = drives.find(letter);
-    cout << "You picked: " << pos->first << " - \"" << pos->second << "\"\n";
-    return letter;
+    return letter + (pos->second);
   }else{
     //Notify the user if the only available drive is the boot drive
     cout << "No available drives!\n";

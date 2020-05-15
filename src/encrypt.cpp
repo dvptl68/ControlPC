@@ -18,8 +18,10 @@ int main(){
   s.parseBuffer(drives);
   //Get drive letter from user
   string d = s.pickDrive(drives);
-  //Create class object for file select
-  PickFile f(d);
-  //Print all available files
-  f.printFiles();
+  if (d.length() > 0){
+    //Create class object for file select
+    PickFile f(d);
+    //Print all available files
+    f.printFiles();
+  }
 }

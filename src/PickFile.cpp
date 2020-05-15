@@ -15,17 +15,16 @@ Tree newTree(string d){
   return t;
 }
 
-void retrieveFiles(string& p, struct Tree files){
+void retrieveFiles(string& p, struct Tree& files){
   DIR *dir;
   struct dirent *e;
   const char *path = p.c_str();
   if ((dir = opendir(path)) != NULL) {
-    vector<Tree> children;
+    vector<Tree> c;
     while ((e = readdir(dir)) != NULL) {
-      children.push_back(newTree(e->d_name));
-      cout << e->d_name << ", ";
+      c.push_back(newTree(e->d_name));
     }
-    cout << "\n";
+    files.children = c;
     closedir (dir);
   }
 }
@@ -47,10 +46,10 @@ string getIndent(int indentSize){
   return indent;
 }
 
-void traversePrint(struct Tree files, int indentSize){
-  cout << getIndent(indentSize) << files.data << "\n";
-  for (int i = 0; i < files.children.size(); i++){
-    traversePrint(files.children[i], indentSize + 2);
+void traversePrint(struct Tree f, int indentSize){
+  cout << getIndent(indentSize) << f.data << "\n";
+  for (int i = 0; i < f.children.size(); i++){
+    traversePrint(f.children[i], indentSize + 2);
   }
 }
 

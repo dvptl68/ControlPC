@@ -5,7 +5,7 @@
 #include <sys/types.h>
 #include <dirent.h>
 #include "DriveSelect.hpp"
-#include "PickFile.hpp"
+#include "GetFile.hpp"
 
 using namespace std;
 
@@ -20,7 +20,7 @@ int main(){
   string d = s.pickDrive(drives);
   if (d.length() > 0){
     //Create class object for file select
-    PickFile f(d);
+    GetFile f(d);
     //Print all available files
     f.printFiles();
   }

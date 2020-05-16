@@ -4,7 +4,7 @@
 #include <string>
 #include <sys/types.h>
 #include <dirent.h>
-#include "PickFile.hpp"
+#include "GetFile.hpp"
 
 using namespace std;
 
@@ -42,14 +42,14 @@ void retrieveFiles(string& p, struct Tree& files){
 }
 
 //Constructor for PickFile class
-PickFile::PickFile(string p){
+GetFile::GetFile(string p){
   //Set the path and name private variables
-  PickFile::path = p.substr(0, 3);
-  PickFile::name = p.substr(3);
+  GetFile::path = p.substr(0, 3);
+  GetFile::name = p.substr(3);
   //Set the Tree private variable
-  PickFile::files = newTree(PickFile::path + " -> \"" + PickFile::name + "\"");
+  GetFile::files = newTree(GetFile::path + " -> \"" + GetFile::name + "\"");
   //Fill the vector with all available files
-  retrieveFiles(PickFile::path, PickFile::files);
+  retrieveFiles(GetFile::path, GetFile::files);
 }
 
 //Returns a string with indentSize number of spaces
@@ -77,8 +77,8 @@ void traversePrint(struct Tree f, int indentSize){
 }
 
 //Uses helper functions to print all filenames to the user
-void PickFile::printFiles(){
+void GetFile::printFiles(){
   //Print the title and call the recursive file print method
   cout << "\nAvailable files and subdirectories: \n\n";
-  traversePrint(PickFile::files, 0);
+  traversePrint(GetFile::files, 0);
 }

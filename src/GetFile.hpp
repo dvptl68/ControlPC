@@ -8,12 +8,12 @@ struct Tree {
   vector<Tree> children;
 };
 
-class PickFile{
+class GetFile{
   private:
     string path;
     string name;
     struct Tree files;
   public:
-    PickFile(string p);
+    GetFile(string p);
     void printFiles();
 };

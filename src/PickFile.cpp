@@ -24,6 +24,7 @@ void retrieveFiles(string& p, struct Tree& files){
   const char *path = p.c_str();
   //Test if the given path is a directory
   if ((dir = opendir(path)) != NULL) {
+    files.data += "\\";
     //Populate the vector with filenames
     while ((e = readdir(dir)) != NULL) {
       string name = e->d_name;
@@ -32,6 +33,7 @@ void retrieveFiles(string& p, struct Tree& files){
       }
     }
     closedir (dir);
+    //Recursively call retrieveFiles on each child to fill subdirectories
     for (int i = 0; i < files.children.size(); i++){
       string path = p + files.children[i].data + "\\";
       retrieveFiles(path, files.children[i]);
@@ -53,8 +55,14 @@ PickFile::PickFile(string p){
 //Returns a string with indentSize number of spaces
 string getIndent(int indentSize){
   string indent = "";
-  for (int i = 0; i < indentSize; i++){
-    indent += " ";
+  if (indentSize > 0){
+    for (int i = 0; i < indentSize-3; i++){
+      indent += " ";
+    }
+    for (int i = indentSize-3; i < indentSize; i++){
+      indent += "-";
+    }
+    indent[indentSize-3] = '|';
   }
   return indent;
 }
@@ -64,13 +72,13 @@ void traversePrint(struct Tree f, int indentSize){
   //Print data with number of indents preceding and make recursive call on each of the children
   cout << getIndent(indentSize) << f.data << "\n";
   for (int i = 0; i < f.children.size(); i++){
-    traversePrint(f.children[i], indentSize + 2);
+    traversePrint(f.children[i], indentSize + 3);
   }
 }
 
 //Uses helper functions to print all filenames to the user
 void PickFile::printFiles(){
   //Print the title and call the recursive file print method
-  cout << "\nAll available files and subdirectories in " << PickFile::path << " -> \"" << PickFile::name << "\": \n\n";
+  cout << "\nAvailable files and subdirectories: \n\n";
   traversePrint(PickFile::files, 0);
 }

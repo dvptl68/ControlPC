@@ -24,11 +24,13 @@ void retrieveFiles(string& p, struct Tree& files){
   const char *path = p.c_str();
   //Test if the given path is a directory
   if ((dir = opendir(path)) != NULL) {
+    //Adds a backslash to show that it is a directory
     files.data += "\\";
     //Populate the vector with filenames
     while ((e = readdir(dir)) != NULL) {
       string name = e->d_name;
-      if (name != "." && name != ".."){
+      //Filters out unecessary files/directories
+      if (name != "." && name != ".." && name != "System Volume Information" && (name.length() > 3 && name.substr(name.length()-4) != ".zip")){
         files.children.push_back(newTree(name));
       }
     }
@@ -56,12 +58,14 @@ GetFile::GetFile(string p){
 string getIndent(int indentSize){
   string indent = "";
   if (indentSize > 0){
+    //Add spaces and then dashes for the indent size
     for (int i = 0; i < indentSize-3; i++){
       indent += " ";
     }
     for (int i = indentSize-3; i < indentSize; i++){
       indent += "-";
     }
+    //Change one character to represent the tree structure
     indent[indentSize-3] = '|';
   }
   return indent;

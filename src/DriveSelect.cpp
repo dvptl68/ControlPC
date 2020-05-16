@@ -10,16 +10,16 @@ using namespace std;
 //Constructor for Select class
 DriveSelect::DriveSelect(void){
   //Fills buffer with drives
-  DWORD test = GetLogicalDriveStrings(sizeof(lpBuffer), lpBuffer);
+  DWORD test = GetLogicalDriveStrings(sizeof(DriveSelect::lpBuffer), DriveSelect::lpBuffer);
 }
 
 //Parses the character buffer into strings with all drive paths
 void DriveSelect::parseBuffer(map<string, string>& drives){
   int i = 0;
-  while (i < (sizeof(lpBuffer)-2)){
+  while (i < (sizeof(DriveSelect::lpBuffer)-2)){
     //If the format of three consecutive characters is a letter + :\, add to drive map
-    if (lpBuffer[i+1] == ':' && lpBuffer[i+2] == '\\'){
-      char current[4] = {lpBuffer[i], ':', '\\'};
+    if (DriveSelect::lpBuffer[i+1] == ':' && DriveSelect::lpBuffer[i+2] == '\\'){
+      char current[4] = {DriveSelect::lpBuffer[i], ':', '\\'};
       //Filters out the boot drive
       if (current[0] != 'C'){
         //Gets the name of the drive given the path

@@ -34,7 +34,7 @@ void retrieveFiles(string& p, struct Tree& files){
     closedir (dir);
     for (int i = 0; i < files.children.size(); i++){
       string path = p + files.children[i].data + "\\";
-      retrieveFiles(path, files.children[files.children.size()-1]);
+      retrieveFiles(path, files.children[i]);
     }
   }
 }

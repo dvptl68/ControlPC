@@ -3,11 +3,11 @@
 
 using namespace std;
 
-class Select{
+class DriveSelect{
   private:
     char lpBuffer[30];
   public:
-    Select();
+    DriveSelect();
     void parseBuffer(map<string, string>& drives);
     string pickDrive(map<string, string>& drives);
 };

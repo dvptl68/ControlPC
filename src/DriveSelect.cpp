@@ -3,18 +3,18 @@
 #include <windows.h>
 #include <map>
 #include <string>
-#include "Select.hpp"
+#include "DriveSelect.hpp"
 
 using namespace std;
 
 //Constructor for Select class
-Select::Select(void){
+DriveSelect::DriveSelect(void){
   //Fills buffer with drives
   DWORD test = GetLogicalDriveStrings(sizeof(lpBuffer), lpBuffer);
 }
 
 //Parses the character buffer into strings with all drive paths
-void Select::parseBuffer(map<string, string>& drives){
+void DriveSelect::parseBuffer(map<string, string>& drives){
   int i = 0;
   while (i < (sizeof(lpBuffer)-2)){
     //If the format of three consecutive characters is a letter + :\, add to drive map
@@ -36,7 +36,7 @@ void Select::parseBuffer(map<string, string>& drives){
 }
 
 //Allows the user to pick a drive from the map
-string Select::pickDrive(map<string, string>& drives){
+string DriveSelect::pickDrive(map<string, string>& drives){
   if (!drives.empty()){
     //List all available drives
     cout << "\nAvailable drives: \n\n";

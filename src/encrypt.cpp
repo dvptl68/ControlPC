@@ -4,14 +4,14 @@
 #include <string>
 #include <sys/types.h>
 #include <dirent.h>
-#include "Select.hpp"
+#include "DriveSelect.hpp"
 #include "PickFile.hpp"
 
 using namespace std;
 
 int main(){
   //Create class object for drive select
-  Select s;
+  DriveSelect s;
   //Create map to store drive letters and their names
   map<string, string> drives;
   //Fill map with parsed drive letters and names

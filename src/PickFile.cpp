@@ -26,11 +26,16 @@ void retrieveFiles(string& p, struct Tree& files){
   if ((dir = opendir(path)) != NULL) {
     //Populate the vector with filenames
     while ((e = readdir(dir)) != NULL) {
-      files.children.push_back(newTree(e->d_name));
-      // string path = p + e->d_name + "\\";
-      // retrieveFiles(path, files.children[files.children.size()-1]);
+      string name = e->d_name;
+      if (name != "." && name != ".."){
+        files.children.push_back(newTree(name));
+      }
     }
     closedir (dir);
+    for (int i = 0; i < files.children.size(); i++){
+      string path = p + files.children[i].data + "\\";
+      retrieveFiles(path, files.children[files.children.size()-1]);
+    }
   }
 }
 

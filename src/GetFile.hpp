@@ -12,6 +12,7 @@ class GetFile{
   private:
     string path;
     string name;
+    int size;
     struct Tree files;
   public:
     GetFile(string p);

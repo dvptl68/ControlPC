@@ -97,20 +97,31 @@ void GetFile::printFiles(){
 }
 
 string findFile(struct Tree& files, string path, string& fileName){
-  if (files.children.size() == 0){
-
+  string r = "";
+  if (files.children.size() == 0 && files.data == fileName){
+    r =  path + fileName;
+  }else{
+    for (int i = 0; i < files.children.size() && r == ""; i++){
+      r = findFile(files.children[i], path + files.data, fileName);
+    }
   }
+  return r;
 }
 
 //Allows user to pick files, fills a vector with the file paths, and returns the vector
 vector<string> GetFile::pickFiles(){
-  string selected;
+  string selected = "a";
+  vector<string> paths;
   while (selected != ""){
     cout << "Enter the name of a file, or nothing to quit (with file extension, case sensitive): ";
     cin >> selected;
     if (selected != ""){
       string path = findFile(GetFile::files, GetFile::path, selected);
-      
+      cout << "\n" << path << "\n";
+      if (path != ""){
+        paths.push_back(path);
+      }
     }
   }
+  return paths;
 }

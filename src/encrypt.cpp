@@ -23,5 +23,7 @@ int main(){
     GetFile f(d);
     //Print all available files
     f.printFiles();
+    //Allow user to select files
+    vector<string> files = f.pickFiles();
   }
 }

@@ -17,4 +17,5 @@ class GetFile{
   public:
     GetFile(string p);
     void printFiles();
+    vector<string> pickFiles();
 };

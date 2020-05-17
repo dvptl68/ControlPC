@@ -76,7 +76,7 @@ string getIndent(int indentSize){
 }
 
 //Traverses the filename tree and prints in orderly fashion
-void traversePrint(struct Tree f, int indentSize){
+void traversePrint(struct Tree& f, int indentSize){
   //Print data with number of indents preceding and make recursive call on each of the children
   cout << getIndent(indentSize) << f.data << "\n";
   for (int i = 0; i < f.children.size(); i++){
@@ -93,5 +93,24 @@ void GetFile::printFiles(){
   }else{
     //Notify the user that there are no available files
     cout << "\nDrive " << GetFile::files.data.substr(0, GetFile::files.data.length()-1) << " has no available files!\n";
+  }
+}
+
+string findFile(struct Tree& files, string path, string& fileName){
+  if (files.children.size() == 0){
+
+  }
+}
+
+//Allows user to pick files, fills a vector with the file paths, and returns the vector
+vector<string> GetFile::pickFiles(){
+  string selected;
+  while (selected != ""){
+    cout << "Enter the name of a file, or nothing to quit (with file extension, case sensitive): ";
+    cin >> selected;
+    if (selected != ""){
+      string path = findFile(GetFile::files, GetFile::path, selected);
+      
+    }
   }
 }

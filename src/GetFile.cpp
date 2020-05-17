@@ -96,11 +96,15 @@ void GetFile::printFiles(){
   }
 }
 
+//Recursive file search algorithm
 string findFile(struct Tree& files, string path, string& fileName){
+  //Initial return value is an empty string
   string r = "";
   if (files.children.size() == 0 && files.data == fileName){
+    //If file is found, fileName is appended to the path
     r =  path + fileName;
   }else{
+    //If file is not found, the children of the tree are searched
     for (int i = 0; i < files.children.size() && r == ""; i++){
       r = findFile(files.children[i], path + files.data, fileName);
     }
@@ -110,18 +114,23 @@ string findFile(struct Tree& files, string path, string& fileName){
 
 //Allows user to pick files, fills a vector with the file paths, and returns the vector
 vector<string> GetFile::pickFiles(){
+  //Create initial storage variables
   string selected = "a";
   vector<string> paths;
+  //Loop executes until nothing is entered
   while (selected != ""){
     cout << "\nEnter the name of a file (with file extension, case sensitive), or nothing to quit: ";
     cin >> selected;
     if (selected != ""){
+      //Get path of file using helper method
       string path = findFile(GetFile::files, GetFile::path, selected);
       if (path != ""){
+        //Add path to vector if it is valid
         string p = path.substr(0, 3) + path.substr(24);
         cout << "File: " << p << " added to queue.\n";
         paths.push_back(p);
       }else{
+        //Warn user if file is not found
         cout << "File: " << selected << " not found!\n";
       }
     }

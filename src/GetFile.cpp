@@ -113,13 +113,16 @@ vector<string> GetFile::pickFiles(){
   string selected = "a";
   vector<string> paths;
   while (selected != ""){
-    cout << "Enter the name of a file, or nothing to quit (with file extension, case sensitive): ";
+    cout << "\nEnter the name of a file (with file extension, case sensitive), or nothing to quit: ";
     cin >> selected;
     if (selected != ""){
       string path = findFile(GetFile::files, GetFile::path, selected);
-      cout << "\n" << path << "\n";
       if (path != ""){
-        paths.push_back(path);
+        string p = path.substr(0, 3) + path.substr(24);
+        cout << "File: " << p << " added to queue.\n";
+        paths.push_back(p);
+      }else{
+        cout << "File: " << selected << " not found!\n";
       }
     }
   }

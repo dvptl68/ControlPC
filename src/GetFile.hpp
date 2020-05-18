@@ -8,7 +8,7 @@ struct Tree {
   vector<Tree> children;
 };
 
-class GetFile{
+class GetFile {
   private:
     string path;
     string name;

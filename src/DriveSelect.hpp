@@ -3,7 +3,7 @@
 
 using namespace std;
 
-class DriveSelect{
+class DriveSelect {
   private:
     char lpBuffer[30];
   public:

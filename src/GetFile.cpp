@@ -140,3 +140,29 @@ vector<string> GetFile::pickFiles(){
   }
   return paths;
 }
+
+//Prints the currently selected files
+void printSelectedFiles(vector<string>& f){
+  //List out all file selections
+  for (int i = 0; i < f.size(); i++){
+    cout << "\n" << (i + 1) << ")" << f[i];
+  }
+}
+
+//Prompts the user to confirm selections before final stage
+void GetFile::confirmFiles(vector<string>& f){
+  int selected = 0;
+  while (f.size() > 0 && selected != -1){
+    //Print current queued files
+    printSelectedFiles(f);
+    //Prompt user to select a file to remove
+    cout << "\n\nEnter the number of the file you would like to remove, or -1 to exit: ";
+    cin >> selected;
+    if (selected != -1){
+      //Delete file and print deleted file name
+      string name = f[selected - 1];
+      f.erase(f.begin() + selected - 1);
+      cout << "\nFile: " << name << " remove from queue.\n";
+    }
+  }
+}

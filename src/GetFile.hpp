@@ -18,4 +18,5 @@ class GetFile{
     GetFile(string p);
     void printFiles();
     vector<string> pickFiles();
+    void confirmFiles(vector<string>& f);
 };

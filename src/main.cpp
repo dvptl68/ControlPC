@@ -25,5 +25,7 @@ int main(){
     f.printFiles();
     //Allow user to select files
     vector<string> files = f.pickFiles();
+    //Prompt user to confirm selections
+    f.confirmFiles(files);
   }
 }

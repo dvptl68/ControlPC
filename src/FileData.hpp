@@ -1,3 +1,4 @@
+#include <fstream>
 #include <string>
 
 using namespace std;
@@ -5,8 +6,11 @@ using namespace std;
 class FileData {
   private:
     string masterPassword;
+    int masterKey;
+    fstream info;
   public:
     FileData();
-    void userInfo();
-    void encryptionInfo();
+    bool infoExists();
+    void setPassword();
+    bool checkPassword(string p);
 };

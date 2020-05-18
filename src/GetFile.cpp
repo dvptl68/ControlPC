@@ -118,10 +118,10 @@ vector<string> GetFile::pickFiles(){
   string selected = "a";
   vector<string> paths;
   //Loop executes until nothing is entered
-  while (selected != ""){
-    cout << "\nEnter the name of a file (with file extension, case sensitive), or nothing to quit: ";
+  while (selected != "*"){
+    cout << "\nEnter the name of a file (with file extension, case sensitive), or * to quit: ";
     cin >> selected;
-    if (selected != ""){
+    if (selected != "*"){
       //Get path of file using helper method
       string path = findFile(GetFile::files, GetFile::path, selected);
       if (path != ""){

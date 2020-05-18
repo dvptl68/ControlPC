@@ -25,8 +25,5 @@ int main(){
     f.printFiles();
     //Allow user to select files
     vector<string> files = f.pickFiles();
-    for (int i = 0; i < files.size(); i++){
-      cout << files[i] << ", ";
-    }
   }
 }

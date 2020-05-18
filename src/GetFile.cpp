@@ -62,15 +62,18 @@ GetFile::GetFile(string p){
 string getIndent(int indentSize){
   string indent = "";
   if (indentSize > 0){
-    //Add spaces and then dashes for the indent size
-    for (int i = 0; i < indentSize-3; i++){
-      indent += " ";
+    //Add spaces and vertical lines
+    for (int i = 0; i < indentSize - 2; i++){
+      if (i % 3 == 0){
+        indent += "|";
+      }else{
+        indent += " ";
+      }
     }
-    for (int i = indentSize-3; i < indentSize; i++){
+    //Add dashes leading up to the file name
+    for (int i = 0; i < 2; i++){
       indent += "-";
     }
-    //Change one character to represent the tree structure
-    indent[indentSize-3] = '|';
   }
   return indent;
 }

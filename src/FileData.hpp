@@ -7,10 +7,9 @@ class FileData {
   private:
     string masterPassword;
     int masterKey;
-    fstream info;
   public:
     FileData();
     bool infoExists();
-    void setPassword();
+    void setPassword(string p);
     bool checkPassword(string p);
 };

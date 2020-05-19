@@ -14,10 +14,22 @@ using namespace std;
 int main(){
   //Create file for information storage
   FileData d;
+  string password;
+  //Check if info file exists
   if (d.infoExists()){
-    cout << "exists";
+    //If file exists, user has already created password and must verify it
+    cout << "Enter the password: ";
+    cin >> password;
+    if (!d.checkPassword(password)){
+      //End program if password is incorrect
+      cout << "Wrong password!\n";
+      return 0;
+    }
   }else{
-    cout << "doesn't exist";
+    //Allow user to create a password
+    cout << "Enter a password to be used for file encryption and decryption: ";
+    cin >> password;
+    d.setPassword(password);
   }
   //Create class object for drive select
   DriveSelect s;

@@ -21,15 +21,29 @@ FileData::FileData(void){
 //Checks if the information file exists and creates one if it doesn't
 bool FileData::infoExists(){
   //Probe the file
-  FileData::info.open("info.txt");
+  ifstream info("info.txt");
   if (info.fail()){
     //Create file if it does not exist
     ofstream create("info.txt");
     create.close();
     return false;
   }else{
-    //Close file if it successfully opens
+    //Get master password and close file if it successfully opens
+    getline(info, FileData::masterPassword);
     info.close();
     return true;
   }
+}
+
+//Sets the master password to be used and adds to info file
+void FileData::setPassword(string p){
+  FileData::masterPassword = p;
+  ofstream info("info.txt");
+  info << p << endl;
+  info.close();
+}
+
+//Checks if the given password matches the master password
+bool FileData::checkPassword(string p){
+  return FileData::masterPassword == p;
 }

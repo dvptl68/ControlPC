@@ -68,5 +68,9 @@ int main(){
     //Allow user to select files
     GetFile f(dr, false);
     vector<string> decrypt = f.pickDecryptFiles(encrypted);
+
+    //decrypt files
+
+    d.removeFileInfo(encrypted, decrypt);
   }
 }

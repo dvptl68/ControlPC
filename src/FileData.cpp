@@ -58,6 +58,30 @@ void FileData::addFileInfo(vector<string>& f){
   info.close();
 }
 
+//Returns whether the given vector contains the given string
+bool hasStr(vector<string>& v, string& s){
+  bool contains = false;
+  for (int i = 0; i < v.size() && !contains; i++){
+    contains |= (v[i] == s);
+  }
+  return contains;
+}
+
+//Removes decrypted files from file
+void FileData::removeFileInfo(vector<string>& encrypted, vector<string>& decrypted){
+  //Overwrite file to update file data
+  ofstream info("info.txt");
+  //Add password as first line
+  info << FileData::masterPassword << endl;
+  for (int i = 0; i < encrypted.size(); i++){
+    //Add path back to file only if it is not being decrypted
+    if (!hasStr(decrypted, encrypted[i])){
+      info << encrypted[i] << endl;
+    }
+  }
+  info.close();
+}
+
 //Prints all encrypted files in the current selected drive
 void printEncrypted(vector<string>& f){
   if (f.size() == 0){

@@ -15,8 +15,8 @@ class GetFile {
     int size;
     struct Tree files;
   public:
-    GetFile(string p);
+    GetFile(string p, bool encrypt);
     void printFiles();
-    vector<string> pickFiles(vector<string>& encrypted);
-    void confirmFiles(vector<string>& f);
+    vector<string> pickEncryptFiles(vector<string>& encrypted);
+    vector<string> pickDecryptFiles(vector<string>& encrypted);
 };

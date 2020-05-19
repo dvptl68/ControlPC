@@ -46,7 +46,7 @@ void retrieveFiles(string& p, struct Tree& files, int& size){
 }
 
 //Constructor for PickFile class
-GetFile::GetFile(string p){
+GetFile::GetFile(string p, bool encrypt){
   //Set the path and name private variables
   GetFile::path = p.substr(0, 3);
   GetFile::name = p.substr(3);
@@ -54,8 +54,10 @@ GetFile::GetFile(string p){
   GetFile::size = 0;
   //Set the Tree private variable
   GetFile::files = newTree(GetFile::path + " -> \"" + GetFile::name + "\"");
-  //Fill the vector with all available files
-  retrieveFiles(GetFile::path, GetFile::files, GetFile::size);
+  if (encrypt){
+    //Fill the vector with all available files
+    retrieveFiles(GetFile::path, GetFile::files, GetFile::size);
+  }
 }
 
 //Returns a string with indentSize number of spaces
@@ -124,14 +126,23 @@ string findFile(struct Tree& files, string path, string& fileName){
   return r;
 }
 
-//Allows user to pick files, fills a vector with the file paths, and returns the vector
-vector<string> GetFile::pickFiles(vector<string>& encrypted){
+//Prints the currently selected files
+void printSelectedFiles(vector<string>& f){
+  //List out all file selections
+  cout << "\nQueued files: ";
+  for (int i = 0; i < f.size(); i++){
+    cout << "\n" << (i + 1) << ")" << f[i];
+  }
+}
+
+//Allows user to pick files to encrypt, fills a vector with the file paths, and returns the vector
+vector<string> GetFile::pickEncryptFiles(vector<string>& encrypted){
   //Create initial storage variables
   string selected = "a";
   vector<string> paths;
   //Loop executes until nothing is entered
   while (selected != "*"){
-    cout << "\nEnter the name of a file (with file extension, case sensitive), or * to quit: ";
+    cout << "\nEnter the name of a file to encrypt (with file extension, case sensitive), or * to start encryption: ";
     cin >> selected;
     if (selected != "*"){
       //Get path of file using helper method
@@ -140,9 +151,15 @@ vector<string> GetFile::pickFiles(vector<string>& encrypted){
         //Add path to vector if it is valid
         string p = path.substr(0, 3) + path.substr(24);
         if (!containsStr(encrypted, p)){
-          cout << "File: " << p << " added to queue.\n";
-          paths.push_back(p);
+          if (!containsStr(paths, p)){
+            cout << "File: " << p << " added to queue.\n";
+            paths.push_back(p);
+          }else{
+            //Warn user if file has already been selected
+            cout << "File: " << p << " is already in queue!\n";
+          }
         }else{
+          //Warn user if file is already encrypted
           cout << "File: " << p << " is already encrypted!\n";
         }
       }else{
@@ -154,29 +171,29 @@ vector<string> GetFile::pickFiles(vector<string>& encrypted){
   return paths;
 }
 
-//Prints the currently selected files
-void printSelectedFiles(vector<string>& f){
-  //List out all file selections
-  cout << "\nQueued files: ";
-  for (int i = 0; i < f.size(); i++){
-    cout << "\n" << (i + 1) << ")" << f[i];
-  }
-}
-
-//Prompts the user to confirm selections before final stage
-void GetFile::confirmFiles(vector<string>& f){
+//Allows user to pick files to decrypt and returns a vector with the chosen file paths
+vector<string> GetFile::pickDecryptFiles(vector<string>& encrypted){
   int selected = 0;
-  while (f.size() > 0 && selected != -1){
-    //Print current queued files
-    printSelectedFiles(f);
+  vector<string> decrypt;
+  while (encrypted.size() > 0 && selected != -1){
     //Prompt user to select a file to remove
-    cout << "\n\nEnter the number of the file you would like to remove, or -1 to begin encryption: ";
+    cout << "\nEnter the number of the file you would like to decrypt, or -1 to begin decryption: ";
     cin >> selected;
     if (selected != -1){
-      //Delete file and print deleted file name
-      string name = f[selected - 1];
-      f.erase(f.begin() + selected - 1);
-      cout << "\nFile: " << name << " remove from queue.\n";
+      if (selected < 1 || selected > encrypted.size()){
+        //Warn user if the number is out of range
+        cout << "You must enter a number between 1 and " << encrypted.size() << "!\n";
+      }else{
+        if (containsStr(decrypt, encrypted[selected - 1])){
+          //Warn user if file has already been selected
+          cout << "File: " << encrypted[selected - 1] << " is already in queue!\n";
+        }else{
+          //Add selected file to decryption vector
+          decrypt.push_back(encrypted[selected - 1]);
+          cout << "File: " << encrypted[selected - 1] << " added to queue.\n";
+        }
+      }
     }
   }
+  return decrypt;
 }

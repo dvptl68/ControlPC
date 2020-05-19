@@ -41,19 +41,32 @@ int main(){
   string dr = s.pickDrive(drives);
   //End program if there are no available drives
   if (dr.length() == 0){ return 0; }
-  //Create class object for file select and report the time it takes
-  cout << "\nParsing file structure...";
-  clock_t start = clock();
-  GetFile f(dr);
-  cout << "completed in " << (std::clock() - start) / (double) CLOCKS_PER_SEC << " seconds.";
-  //Print all available files
-  f.printFiles();
-  //Get and print all files that are already encrypted
-  vector<string> encrypted = d.getFileInfo(dr);
-  //Allow user to select files
-  vector<string> files = f.pickFiles(encrypted);
-  //Prompt user to confirm selections
-  f.confirmFiles(files);
-  //Add selected files to info file
-  d.addFileInfo(files);
+  //Allow user to choose whether to encrypt or decrypt files
+  int choice;
+  cout << "\nEnter 1 to encrypt files or 2 to decrypt files: ";
+  cin >> choice;
+  if (choice == 1){
+    //Create class object for file select and report the time it takes
+    cout << "\nParsing file structure...";
+    clock_t start = clock();
+    GetFile f(dr, true);
+    cout << "completed in " << (std::clock() - start) / (double) CLOCKS_PER_SEC << " seconds.";
+    //Print all available files
+    f.printFiles();
+    //Get and print all files that are already encrypted
+    vector<string> encrypted = d.getFileInfo(dr);
+    //Allow user to select files
+    vector<string> files = f.pickEncryptFiles(encrypted);
+
+    //encrypt files
+
+    //Add selected files to info file
+    d.addFileInfo(files);
+  }else if (choice == 2){
+    //Get and print all files that are already encrypted
+    vector<string> encrypted = d.getFileInfo(dr);
+    //Allow user to select files
+    GetFile f(dr, false);
+    vector<string> decrypt = f.pickDecryptFiles(encrypted);
+  }
 }

@@ -73,7 +73,7 @@ vector<string> FileData::getFileInfo(string& drive){
   string path;
   //Read from file until end of file is reached, pushing file paths into return vector
   while (getline(info, path)){
-    if (path.length() > 3 && drive == path.substr(0, 3)){
+    if (path.length() > 3 && drive.substr(0,3) == path.substr(0, 3)){
       f.push_back(path);
     }
   }

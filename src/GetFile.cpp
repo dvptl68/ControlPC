@@ -99,6 +99,15 @@ void GetFile::printFiles(){
   }
 }
 
+//Returns whether the given vector contains the given string
+bool containsStr(vector<string>& v, string& s){
+  bool contains = false;
+  for (int i = 0; i < v.size() && !contains; i++){
+    contains |= (v[i] == s);
+  }
+  return contains;
+}
+
 //Recursive file search algorithm
 string findFile(struct Tree& files, string path, string& fileName){
   //Initial return value is an empty string
@@ -116,7 +125,7 @@ string findFile(struct Tree& files, string path, string& fileName){
 }
 
 //Allows user to pick files, fills a vector with the file paths, and returns the vector
-vector<string> GetFile::pickFiles(){
+vector<string> GetFile::pickFiles(vector<string>& encrypted){
   //Create initial storage variables
   string selected = "a";
   vector<string> paths;
@@ -130,8 +139,12 @@ vector<string> GetFile::pickFiles(){
       if (path != ""){
         //Add path to vector if it is valid
         string p = path.substr(0, 3) + path.substr(24);
-        cout << "File: " << p << " added to queue.\n";
-        paths.push_back(p);
+        if (!containsStr(encrypted, p)){
+          cout << "File: " << p << " added to queue.\n";
+          paths.push_back(p);
+        }else{
+          cout << "File: " << p << " is already encrypted!\n";
+        }
       }else{
         //Warn user if file is not found
         cout << "File: " << selected << " not found!\n";
@@ -144,6 +157,7 @@ vector<string> GetFile::pickFiles(){
 //Prints the currently selected files
 void printSelectedFiles(vector<string>& f){
   //List out all file selections
+  cout << "\nQueued files: ";
   for (int i = 0; i < f.size(); i++){
     cout << "\n" << (i + 1) << ")" << f[i];
   }
@@ -156,7 +170,7 @@ void GetFile::confirmFiles(vector<string>& f){
     //Print current queued files
     printSelectedFiles(f);
     //Prompt user to select a file to remove
-    cout << "\n\nEnter the number of the file you would like to remove, or -1 to exit: ";
+    cout << "\n\nEnter the number of the file you would like to remove, or -1 to begin encryption: ";
     cin >> selected;
     if (selected != -1){
       //Delete file and print deleted file name

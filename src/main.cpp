@@ -51,7 +51,7 @@ int main(){
   //Get and print all files that are already encrypted
   vector<string> encrypted = d.getFileInfo(dr);
   //Allow user to select files
-  vector<string> files = f.pickFiles();
+  vector<string> files = f.pickFiles(encrypted);
   //Prompt user to confirm selections
   f.confirmFiles(files);
   //Add selected files to info file

@@ -60,9 +60,13 @@ void FileData::addFileInfo(vector<string>& f){
 
 //Prints all encrypted files in the current selected drive
 void printEncrypted(vector<string>& f){
-  cout << "\nCurrently encrypted files: \n";
-  for (int i = 0; i < f.size(); i++){
-    cout << f[i] << "\n";
+  if (f.size() == 0){
+    cout << "\nNo currently encrypted files.\n";
+  }else{
+    cout << "\nCurrently encrypted files: \n";
+    for (int i = 0; i < f.size(); i++){
+      cout << (i+1) << ") " << f[i] << "\n";
+    }
   }
 }
 

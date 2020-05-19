@@ -48,8 +48,12 @@ int main(){
   cout << "completed in " << (std::clock() - start) / (double) CLOCKS_PER_SEC << " seconds.";
   //Print all available files
   f.printFiles();
+  //Get and print all files that are already encrypted
+  vector<string> encrypted = d.getFileInfo(dr);
   //Allow user to select files
   vector<string> files = f.pickFiles();
   //Prompt user to confirm selections
   f.confirmFiles(files);
+  //Add selected files to info file
+  d.addFileInfo(files);
 }

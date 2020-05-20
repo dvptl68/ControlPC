@@ -8,8 +8,9 @@ class FileData {
   private:
     string masterPassword;
     int infoKey;
+    string path;
   public:
-    FileData();
+    FileData(string& p);
     bool infoExists();
     void setPassword(string p);
     bool checkPassword(string p);

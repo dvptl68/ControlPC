@@ -1,6 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <windows.h>
+#include <conio.h>
 #include <ctime>
 #include <map>
 #include <vector>
@@ -20,7 +21,7 @@ bool verify(FileData& d){
   if (d.infoExists()){
 
     //If file exists, user has already created password and must verify it
-    cout << "Enter the password: ";
+    cout << "\nEnter the password: ";
     cin >> password;
 
     if (!d.checkPassword(password)){
@@ -33,9 +34,12 @@ bool verify(FileData& d){
   }else{
 
     //Allow user to create a password
-    cout << "Enter a password to be used for file encryption and decryption: ";
+    cout << "\nEnter a password to be used for file encryption and decryption: ";
     cin >> password;
     d.setPassword(password);
+    cout << "\nThis program will create a file called \"info\" in the selected drive. DO NOT delete or edit this file, or you will lose the ability to decrypt your files.\n";
+    cout << "Press any key to continue...";
+    getch();
   }
 
   return true;
@@ -97,20 +101,20 @@ void decryptSelected(FileData& d, string& dr){
 }
 
 int main(){
-
-  //Create file for information storage
-  FileData d;
-  //End the program if user verification fails
-  if (!verify(d)) { return 0; }
   
   //Get a drive path from user
   string dr = pickDrive();
   //End program if there are no available drives
   if (dr.length() == 0) { return 0; }
 
+  //Create file for information storage
+  FileData d(dr);
+  //End the program if user verification fails
+  if (!verify(d)) { return 0; }
+
   //Allow user to choose whether to encrypt or decrypt files
   int choice;
-  cout << "\nEnter 1 to encrypt files or 2 to decrypt files: ";
+  cout << "\n\nEnter 1 to encrypt files or 2 to decrypt files: ";
   cin >> choice;
 
   //Calls the appropriate driver function based on user selection

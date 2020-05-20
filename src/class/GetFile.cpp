@@ -30,7 +30,7 @@ void retrieveFiles(string& p, struct Tree& files, int& size){
     while ((e = readdir(dir)) != NULL) {
       string name = e->d_name;
       //Filter out unecessary files/directories
-      if (name != "." && name != ".." && name != "System Volume Information" && (name.length() > 3 && name.substr(name.length()-4) != ".zip")){
+      if (name != "." && name != ".." && name != "System Volume Information" && name != "info" && (name.length() > 3 && name.substr(name.length()-4) != ".zip")){
         //Add file/directory to children vector and increase total size
         files.children.push_back(newTree(name));
         size++;

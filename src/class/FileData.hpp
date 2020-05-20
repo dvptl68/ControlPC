@@ -6,7 +6,8 @@ using namespace std;
 
 class FileData {
   private:
-    string masterPassword;
+    string password;
+    int passKey;
     int infoKey;
     string path;
   public:

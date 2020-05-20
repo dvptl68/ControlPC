@@ -38,7 +38,7 @@ bool verify(FileData& d){
     cin >> password;
     d.setPassword(password);
     cout << "\nThis program will create a file called \"info\" in the selected drive. DO NOT delete or edit this file, or you will lose the ability to decrypt your files.\n";
-    cout << "Press any key to continue...";
+    cout << "Press any key to continue...\n";
     getch();
   }
 
@@ -101,7 +101,7 @@ void decryptSelected(FileData& d, string& dr){
 }
 
 int main(){
-  
+
   //Get a drive path from user
   string dr = pickDrive();
   //End program if there are no available drives
@@ -114,7 +114,7 @@ int main(){
 
   //Allow user to choose whether to encrypt or decrypt files
   int choice;
-  cout << "\n\nEnter 1 to encrypt files or 2 to decrypt files: ";
+  cout << "\nEnter 1 to encrypt files or 2 to decrypt files: ";
   cin >> choice;
 
   //Calls the appropriate driver function based on user selection

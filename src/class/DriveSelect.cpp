@@ -57,7 +57,7 @@ string DriveSelect::pickDrive(map<string, string>& drives){
     return letter + (pos->second);
   }else{
     //Notify the user if the only available drive is the boot drive
-    cout << "No available drives!\n";
+    cout << "\nNo available drives!\n";
     return "";
   }
 }

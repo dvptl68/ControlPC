@@ -37,17 +37,22 @@ bool FileData::infoExists(){
 
 //Encrypts the password for safe storage
 string encryptPassword(int& key, string& password){
+  //Set random number seed to the key
   srand(key);
   string newPassword = "";
-  for (int i = 0; i < password.length(); i++){
-    newPassword.push_back('A' - 1 + (rand() % (int)password[i]));
+  //Add key characters to the new password
+  for (int i = 0; i < key; i++){
+    //Pushe an encrypted character to new password
+    newPassword.push_back('A' - 1 + (rand() % (int)password[i % password.length()]));
   }
   return newPassword;
 }
 
 //Sets the master password to be used and adds to info file
 void FileData::setPassword(string p){
+  //Set master password to the encrypted password
   FileData::masterPassword = encryptPassword(FileData::infoKey, p);
+  //Add master password to file
   ofstream info("info", fstream::app);
   info << FileData::masterPassword << endl;
   info.close();
@@ -55,6 +60,7 @@ void FileData::setPassword(string p){
 
 //Checks if the given password matches the master password
 bool FileData::checkPassword(string p){
+  //Compare the master password to the encrypted version of the given password
   return FileData::masterPassword == encryptPassword(FileData::infoKey, p);
 }
 

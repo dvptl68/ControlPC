@@ -13,7 +13,7 @@
 using namespace std;
 
 //Verifies the user
-bool verify(FileData& d){
+bool verify(FileData& d, string& dr){
 
   string password;
 
@@ -21,7 +21,7 @@ bool verify(FileData& d){
   if (d.infoExists()){
 
     //If file exists, user has already created password and must verify it
-    cout << "\nEnter the password: ";
+    cout << "\nEnter the password for " << dr.substr(0, 3) << " -> \"" << dr.substr(3)<< "\": ";
     cin >> password;
 
     if (!d.checkPassword(password)){
@@ -34,10 +34,10 @@ bool verify(FileData& d){
   }else{
 
     //Allow user to create a password
-    cout << "\nEnter a password to be used for file encryption and decryption: ";
+    cout << "\nEnter a password to be used for file encryption and decryption for " << dr.substr(0, 3) << " -> \"" << dr.substr(3)<< "\": ";
     cin >> password;
     d.setPassword(password);
-    cout << "\nThis program will create a hidden file called \"info\" in the selected drive. DO NOT delete or edit this file, or you will lose the ability to decrypt your files.\n";
+    cout << "\nThis program will create a file called \"info\" in the selected drive. DO NOT delete or edit this file, or you will lose the ability to decrypt your files.\n";
     cout << "Press any key to continue...\n";
     getch();
   }
@@ -110,7 +110,7 @@ int main(){
   //Create file for information storage
   FileData d(dr);
   //End the program if user verification fails
-  if (!verify(d)) { return 0; }
+  if (!verify(d, dr)) { return 0; }
 
   //Allow user to choose whether to encrypt or decrypt files
   int choice;

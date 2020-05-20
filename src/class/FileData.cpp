@@ -28,6 +28,8 @@ bool FileData::infoExists(){
     //Create file if it does not exist
     ofstream create(FileData::path);
     create.close();
+    DWORD attributes = GetFileAttributes(FileData::path.c_str());
+    SetFileAttributes(FileData::path.c_str(), attributes + FILE_ATTRIBUTE_HIDDEN);
     return false;
   }else{
     //Get master password and close file if it successfully opens

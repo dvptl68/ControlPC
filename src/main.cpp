@@ -37,7 +37,7 @@ bool verify(FileData& d){
     cout << "\nEnter a password to be used for file encryption and decryption: ";
     cin >> password;
     d.setPassword(password);
-    cout << "\nThis program will create a file called \"info\" in the selected drive. DO NOT delete or edit this file, or you will lose the ability to decrypt your files.\n";
+    cout << "\nThis program will create a hidden file called \"info\" in the selected drive. DO NOT delete or edit this file, or you will lose the ability to decrypt your files.\n";
     cout << "Press any key to continue...\n";
     getch();
   }

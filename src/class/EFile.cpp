@@ -12,39 +12,18 @@ EFile::EFile(void){
 
 //Encrypts the file at the given path using the key
 void EFile::encrypt(string& path){
-	char ch;
-	fstream file, fileTemp;
-	file.open(path);
-	if(!file){
-		cout<<"Error opening file!";
-	}
-	fileTemp.open("temp.txt");
-	if(!fileTemp){
-		cout<<"Error creating temp file!";
-		file.close();
-	}
-	while(file.eof()==0){
-		file>>ch;
+  ifstream fileOut(path);
+  if (!fileOut){ cout << "Error opening source file\n"; }
+  ofstream tempIn("temp.txt");
+  if (!tempIn){ cout << "Error creating temp file\n";}
+  char ch;
+  while(fileOut.eof()==0){
+		fileOut>>ch;
 		ch=ch+100;
-		fileTemp<<ch;
+		tempIn<<ch;
 	}
-	file.close();
-	fileTemp.close();
-	file.open(path);
-	if(!file){
-		cout<<"Error opening source file!";
-	}
-	fileTemp.open("temp.txt");
-	if(!fileTemp){
-		cout<<"Error in opening temp.txt file...!!";
-		file.close();
-	}
-	while(fileTemp.eof()==0){
-		fileTemp>>ch;
-		file<<ch;
-	}
-	cout<<"File "<<path<<" encrypted successfully..!!";
-	cout<<"\nPress any key to exit...";
+  fileOut.close();
+  tempIn.close();
 }
 
 //Decrypts the file at the given path using the key

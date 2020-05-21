@@ -12,18 +12,35 @@ EFile::EFile(void){
 
 //Encrypts the file at the given path using the key
 void EFile::encrypt(string& path){
-  ifstream fileOut(path);
-  ofstream tempIn("temp.txt");
+  //Open source file as input stream and temp file as output stream
+  ifstream fileIn(path);
+  ofstream tempOut("temp.txt");
+  //Read each line from file until end is reached
   string p;
-  while(getline(fileOut, p)){
-    string temp;
+  while(getline(fileIn, p)){
+    //Iterate through line encrypting each character
 		for (int i = 0; i < p.length(); i++){
-      temp.push_back(p[i]+1);
+      p[i] = p[i] + 1;
     }
-		tempIn << temp << endl;
+    //Add encrypted line to temp file
+		tempOut << p << endl;
 	}
+  //Close all open files
+  fileIn.close();
+  tempOut.close();
+  //Open source file as output stream and temp file as input stream
+  ofstream fileOut(path);
+  ifstream tempIn("temp.txt");
+  //Read each line from temp file until end is reached
+  string t;
+  while(getline(tempIn, t)){
+    //Add encrypted line back to source file
+		fileOut << t << endl;
+	}
+  //Close all open files
   fileOut.close();
   tempIn.close();
+  //Delete temp file
   remove("temp.txt");
 }
 

@@ -13,20 +13,20 @@ EFile::EFile(void){
 //Encrypts the file at the given path using the key
 void EFile::encrypt(string& path){
   ifstream fileOut(path);
-  if (!fileOut){ cout << "Error opening source file\n"; }
   ofstream tempIn("temp.txt");
-  if (!tempIn){ cout << "Error creating temp file\n";}
-  char ch;
-  while(fileOut.eof()==0){
-		fileOut>>ch;
-		ch=ch+100;
-		tempIn<<ch;
+  string p;
+  while(getline(fileOut, p)){
+    string temp;
+		for (int i = 0; i < p.length(); i++){
+      temp.push_back(p[i]+1);
+    }
+		tempIn << temp << endl;
 	}
   fileOut.close();
   tempIn.close();
+  remove("temp.txt");
 }
 
 //Decrypts the file at the given path using the key
 void EFile::decrypt(string& path){
-
 }

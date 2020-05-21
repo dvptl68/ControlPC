@@ -63,7 +63,7 @@ string pickDrive(){
 }
 
 //Driver function if encrypt is selected
-void encryptSelected (FileData& d, string& dr){
+void encryptSelected (FileData& d, EFile& e, string& dr){
 
   //Create class object for file select and report the time it takes
   cout << "\nParsing file structure...";
@@ -80,14 +80,17 @@ void encryptSelected (FileData& d, string& dr){
   //Allow user to select files to encrypt
   vector<string> files = f.pickEncryptFiles(encrypted);
 
-  //encrypt files
+  //Iterate through files vector, encrypting each file
+  for (int i = 0; i < files.size(); i++){
+    e.encrypt(files[i]);
+  }
 
   //Add selected files to info file
   d.addFileInfo(files);
 }
 
 //Driver function if decrypt is selected
-void decryptSelected(FileData& d, string& dr){
+void decryptSelected(FileData& d, EFile& e, string& dr){
 
   //Get and print all files that are already encrypted
   vector<string> encrypted = d.getFileInfo(dr);
@@ -96,8 +99,12 @@ void decryptSelected(FileData& d, string& dr){
   GetFile f(dr, false);
   vector<string> decrypt = f.pickDecryptFiles(encrypted);
 
-  //decrypt files
+  //Iterate through decrypt vector, decrypting each file
+  for (int i = 0; i < decrypt.size(); i++){
+    e.decrypt(decrypt[i]);
+  }
 
+  //Remove decrypted files from info file
   d.removeFileInfo(encrypted, decrypt);
 }
 
@@ -118,6 +125,9 @@ int main(){
   cout << "\nEnter 1 to encrypt files or 2 to decrypt files: ";
   cin >> choice;
 
+  //Create object for file encryption/decryption
+  EFile e;
+
   //Calls the appropriate driver function based on user selection
-  if (choice == 1) { encryptSelected(d, dr); } else if (choice == 2) { decryptSelected(d, dr); } else { return 0; }
+  if (choice == 1) { encryptSelected(d, e, dr); }else if (choice == 2) { decryptSelected(d, e, dr); } else { return 0; }
 }

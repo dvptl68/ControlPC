@@ -9,6 +9,7 @@
 #include "class/DriveSelect.hpp"
 #include "class/GetFile.hpp"
 #include "class/FileData.hpp"
+#include "class/EFile.hpp"
 
 using namespace std;
 

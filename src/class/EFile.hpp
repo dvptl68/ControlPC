@@ -2,11 +2,11 @@
 
 using namespace std;
 
-class EncryptFile {
+class EFile {
   private:
     int key;
   public:
-    EncryptFile(int k);
+    EFile(int k);
     void encrypt(string& path);
     void decrypt(string& path);
 };

@@ -23,7 +23,7 @@ void EFile::encrypt(string& path){
   while(getline(fileIn, p)){
     //Iterate through line encrypting each character
 		for (int i = 0; i < p.length(); i++){
-      p[i] += rand();
+      p[i] = p[i] + rand() + 32;
     }
     //Add encrypted line to temp file
 		tempOut << p << endl;
@@ -59,7 +59,7 @@ void EFile::decrypt(string& path){
   while(getline(fileIn, p)){
     //Iterate through line decrypting each character
 		for (int i = 0; i < p.length(); i++){
-      p[i] -= rand();
+      p[i] = p[i] - rand() - 32;
     }
     //Add encrypted line to temp file
 		tempOut << p << endl;

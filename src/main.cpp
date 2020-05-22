@@ -81,9 +81,12 @@ void encryptSelected (FileData& d, EFile& e, string& dr){
   vector<string> files = f.pickEncryptFiles(encrypted);
 
   //Iterate through files vector, encrypting each file
+  cout << "\nEncrypting...";
+  start = clock();
   for (int i = 0; i < files.size(); i++){
     e.encrypt(files[i]);
   }
+  cout << "encrypted " << files.size() << " file(s) in " << (std::clock() - start) / (double) CLOCKS_PER_SEC << " seconds.\n";
 
   //Add selected files to info file
   d.addFileInfo(files);
@@ -100,9 +103,12 @@ void decryptSelected(FileData& d, EFile& e, string& dr){
   vector<string> decrypt = f.pickDecryptFiles(encrypted);
 
   //Iterate through decrypt vector, decrypting each file
+  cout << "\nDecrypting...";
+  clock_t start = clock();
   for (int i = 0; i < decrypt.size(); i++){
     e.decrypt(decrypt[i]);
   }
+  cout << "decrypted " << decrypt.size() << " file(s) in " << (std::clock() - start) / (double) CLOCKS_PER_SEC << " seconds.\n";
 
   //Remove decrypted files from info file
   d.removeFileInfo(encrypted, decrypt);
@@ -129,5 +135,5 @@ int main(){
   EFile e(d.getKey());
 
   //Calls the appropriate driver function based on user selection
-  if (choice == 1) { encryptSelected(d, e, dr); }else if (choice == 2) { decryptSelected(d, e, dr); } else { return 0; }
+  if (choice == 1) { encryptSelected(d, e, dr); } else if (choice == 2) { decryptSelected(d, e, dr); } else { return 0; }
 }

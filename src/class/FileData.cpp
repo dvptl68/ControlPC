@@ -92,7 +92,7 @@ string encryptPath(int key, string& p){
   //Add key characters to the new path
   for (int i = 0; i < p.length(); i++){
     //Push an encrypted character to new path
-    newPath.push_back('A' - 1 + (rand() % key) + p[i]);
+    newPath.push_back('A' + 31 + (rand() % key) + p[i]);
   }
   return newPath;
 }
@@ -105,7 +105,7 @@ string decryptPath(int key, string& p){
   //Add key characters to the new path
   for (int i = 0; i < p.length(); i++){
     //Push a decrypted character to new path
-    newPath.push_back(1 - 'A' - (rand() % key) + p[i]);
+    newPath.push_back(p[i] - 'A' - 31 - (rand() % key));
   }
   return newPath;
 }

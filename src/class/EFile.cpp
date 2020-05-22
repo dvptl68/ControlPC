@@ -6,12 +6,12 @@
 using namespace std;
 
 //Constructor for EFile class
-EFile::EFile(void){
-  //Nothing to do here
+EFile::EFile(int k){
+  EFile::key = k;
 }
 
 //Encrypts the file at the given path using the key
-void EFile::encrypt(string& path, int& key){
+void EFile::encrypt(string& path){
   //Open source file as input stream and temp file as output stream
   ifstream fileIn(path);
   ofstream tempOut("temp.txt");
@@ -45,7 +45,7 @@ void EFile::encrypt(string& path, int& key){
 }
 
 //Decrypts the file at the given path using the key
-void EFile::decrypt(string& path, int& key){
+void EFile::decrypt(string& path){
   //Open source file as input stream and temp file as output stream
   ifstream fileIn(path);
   ofstream tempOut("temp.txt");

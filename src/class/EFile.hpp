@@ -3,8 +3,10 @@
 using namespace std;
 
 class EFile {
+  private:
+    int key;
   public:
-    EFile();
-    void encrypt(string& path, int& key);
-    void decrypt(string& path, int& key);
+    EFile(int k);
+    void encrypt(string& path);
+    void decrypt(string& path);
 };

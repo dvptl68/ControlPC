@@ -7,11 +7,14 @@ using namespace std;
 
 //Constructor for EFile class
 EFile::EFile(int k){
+  //Set class key variable
   EFile::key = k;
 }
 
 //Encrypts the file at the given path using the key
 void EFile::encrypt(string& path){
+  //Set random number seed
+  srand(EFile::key);
   //Open source file as input stream and temp file as output stream
   ifstream fileIn(path);
   ofstream tempOut("temp.txt");
@@ -20,7 +23,7 @@ void EFile::encrypt(string& path){
   while(getline(fileIn, p)){
     //Iterate through line encrypting each character
 		for (int i = 0; i < p.length(); i++){
-      p[i] = p[i] + 1;
+      p[i] = 'A' - 1 + ((rand() % key) * p[i]);
     }
     //Add encrypted line to temp file
 		tempOut << p << endl;
@@ -46,6 +49,8 @@ void EFile::encrypt(string& path){
 
 //Decrypts the file at the given path using the key
 void EFile::decrypt(string& path){
+  //Set random number seed
+  srand(EFile::key);
   //Open source file as input stream and temp file as output stream
   ifstream fileIn(path);
   ofstream tempOut("temp.txt");
@@ -54,7 +59,7 @@ void EFile::decrypt(string& path){
   while(getline(fileIn, p)){
     //Iterate through line decrypting each character
 		for (int i = 0; i < p.length(); i++){
-      p[i] = p[i] - 1;
+      p[i] = (1 - 'A') / (rand() % key);
     }
     //Add encrypted line to temp file
 		tempOut << p << endl;

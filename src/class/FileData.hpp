@@ -15,6 +15,7 @@ class FileData {
     bool infoExists();
     void setPassword(string p);
     bool checkPassword(string p);
+    int getKey();
     void addFileInfo(vector<string>& f);
     void removeFileInfo(vector<string>& encrypted, vector<string>& decrypted);
     vector<string> getFileInfo(string& drive);

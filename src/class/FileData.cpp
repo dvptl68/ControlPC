@@ -20,6 +20,15 @@ FileData::FileData(string& p){
   FileData::path = p.substr(0, 3) + "info";
 }
 
+//Sets the user password generated key
+void setKey(int& passKey, string& password){
+  //Use a random number to generate a key - consistent every time the program is run because no seed is given
+  passKey = 1;
+  for (int i = 0; i < password.length(); i++){
+    passKey += password[i] + (rand() % (passKey + 1));
+  }
+}
+
 //Checks if the information file exists and creates one if it doesn't
 bool FileData::infoExists(){
   //Probe the file
@@ -33,6 +42,8 @@ bool FileData::infoExists(){
     //Get master password and close file if it successfully opens
     getline(info, FileData::password);
     info.close();
+    //Generate password key
+    setKey(FileData::passKey, FileData::password);
     return true;
   }
 }
@@ -54,6 +65,8 @@ string encryptPassword(int& key, string& password){
 void FileData::setPassword(string p){
   //Set master password to the encrypted password
   FileData::password = encryptPassword(FileData::infoKey, p);
+  //Generate password key
+  setKey(FileData::passKey, FileData::password);
   //Add master password to file
   ofstream info(FileData::path, fstream::app);
   info << FileData::password << endl;
@@ -64,6 +77,11 @@ void FileData::setPassword(string p){
 bool FileData::checkPassword(string p){
   //Compare the master password to the encrypted version of the given password
   return FileData::password == encryptPassword(FileData::infoKey, p);
+}
+
+//Returns the password generated key
+int FileData::getKey(){
+  return FileData::passKey;
 }
 
 //Encrypts file paths before adding to information file

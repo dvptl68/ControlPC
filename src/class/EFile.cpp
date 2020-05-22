@@ -11,7 +11,7 @@ EFile::EFile(void){
 }
 
 //Encrypts the file at the given path using the key
-void EFile::encrypt(string& path){
+void EFile::encrypt(string& path, int& key){
   //Open source file as input stream and temp file as output stream
   ifstream fileIn(path);
   ofstream tempOut("temp.txt");
@@ -45,7 +45,7 @@ void EFile::encrypt(string& path){
 }
 
 //Decrypts the file at the given path using the key
-void EFile::decrypt(string& path){
+void EFile::decrypt(string& path, int& key){
   //Open source file as input stream and temp file as output stream
   ifstream fileIn(path);
   ofstream tempOut("temp.txt");

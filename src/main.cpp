@@ -134,6 +134,6 @@ int main(){
   //Create object for file encryption/decryption
   EFile e(d.getKey());
 
-  //Calls the appropriate driver function based on user selection
+  //Call the appropriate driver function based on user selection
   if (choice == 1) { encryptSelected(d, e, dr); } else if (choice == 2) { decryptSelected(d, e, dr); } else { return 0; }
 }

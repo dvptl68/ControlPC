@@ -16,4 +16,4 @@ You may notice that there is also a [scripts](https://github.com/dvptl68/Encrypt
 - [updateBatch.cmd](https://github.com/dvptl68/Encryptor/blob/master/scripts/updateBatch.cmd) - CMD script that stages, commits, and pushes changes to the repository
 
 ## Contribute:
-It is highly likely that there are bugs that I missed, so if you find a bug, you can create an issue or fork this repository, fix the bug, and create a pull request!
+There may be bugs that I missed, so if you find a bug, you can create an issue or fork this repository, fix the bug, and create a pull request!

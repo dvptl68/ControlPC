@@ -2,7 +2,7 @@
 A program that encrypts your files for you.
 
 ## How to use it:
-Clone the project and compile it with GCC or MSVC or [download the exe](https://github.com/dvptl68/Encryptor/blob/master/bin/out.exe?raw=true), open a Windows terminal in the directory with the exe file , and run the program. With CMD, this can be done with: `filename.exe`, or in Git Bash: `./filename`.  
+Clone the project and compile it with GCC or MSVC or [download the exe](https://github.com/dvptl68/Encryptor/blob/master/bin/out.exe?raw=true), open a Windows terminal in the directory with the exe file , and run the program. With CMD, this can be done with: `filename.exe`, or in a Bash terminal (such as Git Bash): `./filename`.  
   
 **Keep in mind that this program has been designed to work on Windows and is not cross-platform.**
 

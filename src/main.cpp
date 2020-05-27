@@ -80,6 +80,9 @@ void encryptSelected (FileData& d, EFile& e, string& dr){
   //Allow user to select files to encrypt
   vector<string> files = f.pickEncryptFiles(encrypted);
 
+  //End program if no files are selected to encrypt
+  if (files.size() == 0){ cout << "\nNo files selected to encrypt.\n"; return; }
+
   //Iterate through files vector, encrypting each file
   cout << "\nEncrypting...";
   start = clock();
@@ -97,6 +100,9 @@ void decryptSelected(FileData& d, EFile& e, string& dr){
 
   //Get and print all files that are already encrypted
   vector<string> encrypted = d.getFileInfo(dr);
+
+  //End program if no files are encrypted yet
+  if (encrypted.size() == 0){ return; }
 
   //Allow user to select files to decrypt
   GetFile f(dr, false);

@@ -9,7 +9,7 @@ Clone the project and compile it with GCC or MSVC or [download the executable](h
 ## How it works:
 In the src folder, there is a [main.cpp](https://github.com/dvptl68/Encryptor/blob/master/src/main.cpp) file and another folder called [class](https://github.com/dvptl68/Encryptor/tree/master/src/class), which contains all the class files. Most of the code in this program belongs to the class files, because each class represents a different stage of the program.  
   
-Traversing the filesystem and storing directory information was the most challenge part of this project. I created a data structure I called "tree", with two members: data and a vector of "tree" called children. The recursive design of this data structure modeled a filesystem perfectly, and was useful for storing directory information, printing files in a tree view, and searching for specific files.  
+Traversing the filesystem and storing directory information was the most challenge part of this project. I created a data structure I called "tree", with two members: data and a vector of "tree" called children. The recursive design of this data structure models a filesystem perfectly, and is useful for storing directory information, printing files in a tree view, and searching for specific files.  
   
 You may notice that there is also a [scripts](https://github.com/dvptl68/Encryptor/tree/master/scripts) folder. The scripts in this folder are not part of the actual program, but they are scripts that helped expedite the development process. Each script is described below: 
 - [rBash.sh](https://github.com/dvptl68/Encryptor/blob/master/scripts/rBash.sh) - Bash script that compiles and runs the program

@@ -1,4 +1,4 @@
-# Encryptor
+# Encryptor :closed_lock_with_key:
 A program that encrypts your files for you.
 
 ## How to use it:
